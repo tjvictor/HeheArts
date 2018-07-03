@@ -18,18 +18,42 @@ a:active {color: blue}
 body {
     background: #EDEDED;
     display: block;
-    width: 1000px;
+    width: 100%;
     margin: 0 auto;
 }
 
-.ul_title {
-    background: blue;
-    color: white;
-    font-size: 1.3rem;
+.top{
+    width:100%;
+    height: 80px;
+    background-color: white;
+}
+.top .nav{
+    max-width:1200px;
+    height: 80px;
+    margin: 0 auto;
+}
+.top .navPic{
+    float: left;
+    width: 25%;
+    height: 80px;
+    line-height: 80px;
+    cursor: pointer;
+    position: relative;
+}
+.top .navMenu{
+    float: left;
+    width: 15%;
+    height: 80px;
+    color: black;
+    line-height: 30px;
+    cursor: pointer;
+    font-weight: bold;
+    position: relative;
 }
 
-.li_item {
-    font-size: 1rem;
+.bottom{
+    vertical-align: middle;
+    text-align: center;
 }
 
 .left{
@@ -41,64 +65,6 @@ body {
 
 .clear{
     clear:both;
-}
-
-.text-middle{
-    vertical-align: middle;
-    text-align: center;
-}
-
-.navDiv{
-    width:100%;
-    height:30px;
-    margin-top:5px;
-    background-color:#0977AC;
-    vertical-align: middle;
-    text-align: center;
-}
-
-.navDiv div{
-     float:left;
-     width:12.5%;
-     height:30px;
-     color:white;
-     line-height:30px;
-     cursor:pointer;
- }
-
- .navDiv div:hover{
-     background-color:black;
- }
-
- .navDiv .navMenuSelected{
-      background-color:black;
- }
-
-.divhover:hover{
-    color: white;
-    background-color:#B5B5B5;
-}
-.divhover{
-    width:100%;
-    height:30px;
-    padding:8px;
-    cursor: pointer;
-}
-.divselected {
-    color: white;
-    background-color:#B5B5B5;
-}
-
-.aboutDivhover{
-    width:100%;
-    height:50px;
-    padding:15px;
-    cursor: pointer;
-    border-bottom: 1px solid #1A5A79;
-}
-.aboutDivselected {
-    color: #000000;
-    background-color:white;
 }
 
 
@@ -119,19 +85,6 @@ body {
 	background-repeat: no-repeat;
 	background-position : center 100px;
 	background-size : 165px 120px;
-	position: fixed;
-	left: 0;
-	top: 0;
-	width: 100%;
-	height: 100%;
-}
-
-.reset-pwd-mask{
-    display: none;
-	z-index: 9912;
-	background : #F3F3F3;
-    filter: alpha(opacity=40);
-    opacity: 0.80;
 	position: fixed;
 	left: 0;
 	top: 0;
