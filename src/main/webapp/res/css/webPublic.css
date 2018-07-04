@@ -52,8 +52,17 @@ body {
     background-color: black;
     color: white;
 }
+.top .navMenuSelected{
+    background-color: black;
+    color: white;
+}
 
 .banner{
+    max-width:1200px;
+    margin: 0 auto;
+}
+
+.content{
     max-width:1200px;
     margin: 0 auto;
 }
