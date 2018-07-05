@@ -209,6 +209,41 @@ function getNotifyTotalCountCallback(data){
         $('#notifyPagination').pagination({total:data.callBackData})
     }
 }
+
+function loadNotificationsForHomePage(){
+    callAjax('/websiteService/loadNotificationList', '', 'loadNotificationsForHomePageCallback', '', '', 'pageNumber=1&pageSize=12', '');
+}
+function loadNotificationsForHomePageCallback(data){
+    if (data.status == "ok") {
+        $('#notificationHomePageUl').html('');
+        var template = '';
+        for(var i = 0 ; i < data.callBackData.length; i++ ){
+            var item = data.callBackData[i];
+            template += '<li style="padding:5px;">';
+            template += '<div class="left" style="width:80%"><a href="index.html?page=notification&id='+item.id+'" target="_blank"><p style="text-overflow:ellipsis;width:100%;overflow:hidden;white-space:nowrap;">'+item.title+'</p></a></div>';
+            template += '<div class="right" style="width:20%;text-align:right;">'+item.date+'</div>';
+            template += '<div class="clear"></div>';
+            template += '</li>';
+        }
+        $('#notificationHomePageUl').html(template);
+    }
+}
+
+function loadNotificationById(id){
+    callAjax('/websiteService/loadNotificationById', '', 'loadNotificationByIdCallback', '', '', id, '');
+}
+function loadNotificationByIdCallback(data){
+    if (data.status == "ok") {
+        var item = data.callBackData;
+        var style = '<style>.notificationStyle{background-color:white;border-radius:10px;min-height:400px;} .notificationStyle h1{text-align:center;font-size: 2rem;padding:15px;} </style>';
+        var wrapperPrefix = '<div class="notificationStyle">';
+        var wrapperSuffix = '</div>';
+        var title = '<h1>'+item.title+'</h1>';
+        var author = '<p style="text-align:center;font-size: 1rem;padding:15px;">时间:'+item.date+'</p>';
+        var content = item.content;
+        $('.content').html(style+wrapperPrefix+title+author+content+wrapperSuffix);
+    }
+}
 //notification end
 
 //member start

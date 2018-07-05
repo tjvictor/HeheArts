@@ -1,3 +1,9 @@
+<script>
+    $(function () {
+        loadNotificationsForHomePage();
+    });
+</script>
+
 <div style="width:100%;height:auto;background-color:white;padding:5px;">
     <div style="margin: 5px 0 5px 10px; font-size:16px;font-weight: bold;">教学理念：</div>
     <div class="splitLine"></div>
@@ -11,6 +17,13 @@
     <div class="left" style="width:59%;height:373px; background-color:white;">
         <div style="margin: 5px 0 5px 10px; font-size:16px;font-weight: bold;">最新通知：</div>
         <div class="splitLine"></div>
+        <div style="width:100%;padding:0 5px;">
+            <div id="notificationDiv" style="width:100%;padding:5px;height:auto;background-color:#FFFFFF;">
+                <ul id="notificationHomePageUl">
+
+                </ul>
+            </div>
+        </div>
     </div>
     <div class="right" style="width:40%;background-color:white;">
         <div style="margin: 5px 0 5px 30px; font-size:16px;font-weight: bold;">课程分类：</div>
