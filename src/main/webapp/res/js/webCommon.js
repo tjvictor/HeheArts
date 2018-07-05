@@ -4,17 +4,6 @@ function callAjax(url, iTarget, iCallBack, iCallBackParam, iPost, iParams, iLoad
 
 function callAjax(url, iTarget, iCallBack, iCallBackParam, iPost, iParams, iLoading, async) {
     var aPost = iPost ? 'POST' : 'GET';
-    var usid = user ? user.sid : '';
-    if(aPost == 'GET')
-        if(iParams)
-            iParams = iParams+'&usid='+usid;
-        else
-            iParams = 'usid='+usid;
-    else{
-        if(!iParams)
-            iParams = {};
-        iParams.usid = usid;
-    }
     var aTarget = iTarget ? '#' + iTarget: iTarget;
     $(iLoading).css('display', 'block');
     $.ajax({

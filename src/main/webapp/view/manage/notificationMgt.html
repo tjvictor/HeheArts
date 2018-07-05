@@ -1,10 +1,88 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<script>
+    $(function (){
+        $.parser.parse('#mgtContentDiv');
+        initNotifyKindeditor();
+    });
+</script>
+<div id="mgtContentDiv">
+    <table id="notifyView" class="easyui-datagrid" style="width:100%;height:auto"
+           data-options="
+				iconCls: 'icon-edit',
+				singleSelect: true,
+				toolbar: '#notifyViewTool',
+                singleSelect:true,
+                idField: 'id',
+			">
+        <thead>
+        <tr>
+            <th data-options="field:'id',hidden:true,width:80">Id</th>
+            <th data-options="field:'title',width:500">通知标题</th>
+            <th data-options="field:'date',width:100">发布时间</th>
+        </tr>
+        </thead>
+    </table>
+    <div id="notifyViewTool" style="height:auto">
+        <div style="float:left;">
+            <span style="font-size:1rem">通知标题</span>
+            <input id="n_tool_titleTxt" class="easyui-textbox" style="width:100px;">
+        </div>
+        <div class="datagrid-btn-separator" style="margin-left:20px"></div>
+        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true"
+           onclick="notifySearch(1, 10)">查询</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true"
+           onclick="openNotifyPanel('add')">新增通知</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-save',plain:true"
+           onclick="openNotifyPanel('edit')">编辑通知</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true"
+           onclick="deleteNotify()">删除通知</a>
+    </div>
+    <div id="notifyPagination" class="easyui-pagination"
+         style="background:#efefef;border:1px solid #ccc;margin-top:10px;"
+         data-options="total:0,pageSize:10,showRefresh:false,showPageList:false,onSelectPage:function(pageNumber, pageSize){ notifySearch(pageNumber, pageSize);;}">
+    </div>
+    <div id="notifyUpdateView" class="easyui-dialog" title="编辑通知"
+         style="width:1000px;height:620px;display:none;padding:10px;"
+         data-options="iconCls:'icon-save',resizable:false,modal:true,closed:true">
+        <table style="width:100%">
+            <tr>
+                <td style="width:8%">通知标题:</td>
+                <td style="width:77%">
+                    <input id="n_titleTxt" class="easyui-textbox" data-options="required:true" style="width:100%">
+                </td>
+                <td style="width:15%;">
+                    <input id="n_fileUploader" name="n_fileUploader" type="file" style="display:none;"
+                           onchange="kindeditorFileUploading('n_fileUploader', notifyKindeditor);">
+                    <label for="n_fileUploader" style="cursor:pointer;margin-left:5px"
+                           onclick="setFileUploadType('file')"><img src="../../res/img/file-icon.png" title="插入文件"></label>
+                    <label for="n_fileUploader" style="cursor:pointer;margin-left:5px"
+                           onclick="setFileUploadType('image')"><img src="../../res/img/picture-icon.png"
+                                                                     title="插入图片"></label>
+                    <label for="n_fileUploader" style="cursor:pointer;" onclick="setFileUploadType('audio')"><img
+                            src="../../res/img/audio-icon.png" title="插入音频"></label>
+                    <label for="n_fileUploader" style="cursor:pointer;" onclick="setFileUploadType('video')"><img
+                            src="../../res/img/video-icon.png" title="插入视频"></label>
+                </td>
+            </tr>
+            <tr>
 
-</body>
-</html>
+                <td colspan="3">
+                    <div class="splitLine"></div>
+                    <textarea id="n_contentTxt" name="n_contentTxt" style="width:100%;"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <input id="n_idTxt" type="text" style="display:none">
+                    <input id="n_dateTxt" type="text" style="display:none">
+
+                    <div id="addNotifyBtn" class="easyui-linkbutton" data-options="iconCls:'icon-add'"
+                         onclick="addNotify()" style="float:right">增加通知
+                    </div>
+                    <div id="updateNotifyBtn" class="easyui-linkbutton" data-options="iconCls:'icon-edit'"
+                         onclick="updateNotify()" style="float:right">修改通知
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

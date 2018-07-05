@@ -35,7 +35,7 @@ body {
 .top .navPic{
     width: 100%;
     height: 50px;
-    line-height: 80px;
+    line-height: 50px;
     cursor: pointer;
 }
 .top .navMenu{
@@ -94,7 +94,20 @@ body {
     width:100%;
     height:1px;
 }
-
+.divHover:hover{
+    color: white;
+    background-color:#B5B5B5;
+}
+.divHover{
+    width:100%;
+    height:30px;
+    padding:8px;
+    cursor: pointer;
+}
+.divSelected {
+    color: white;
+    background-color:#B5B5B5;
+}
 .window-page-mask{
     display: none;
 	z-index: 9911;
