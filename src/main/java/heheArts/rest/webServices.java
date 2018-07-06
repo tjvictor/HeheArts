@@ -224,7 +224,7 @@ public class webServices {
             if (!memberDaoImp.login(tel, password)) {
                 return new ResponseObject("error", "用户不存在或密码错误!", "");
             }
-            List<MemberExt> items = memberDaoImp.searchMemberExtInfoByTel(tel, password);
+            List<MemberExt> items = memberDaoImp.searchMemberExtInfoByTel(tel);
             return new ResponseObject("ok", "查询成功", items);
 
         } catch (SQLException e) {

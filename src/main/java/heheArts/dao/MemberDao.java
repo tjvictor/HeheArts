@@ -28,5 +28,5 @@ public interface MemberDao {
 
     int getMemberTotalCount(String name) throws SQLException;
 
-    List<MemberExt> searchMemberExtInfoByTel(String tel, String password) throws SQLException;
+    List<MemberExt> searchMemberExtInfoByTel(String tel) throws SQLException;
 }

@@ -425,15 +425,14 @@ function searchMemberExtInfoByTelCallback(data){
             template += '<tr style="height:30px;"><td style="text-align:right">报名费用:</td><td style="text-align:left;padding-left:50px;"><span>'+member.courseFee+'</span></td> </tr>';
             template += '<tr style="height:30px;"><td style="text-align:right">使用课时:</td><td style="text-align:left;padding-left:50px;"><span>'+member.courseUsed+'</span></td> </tr>';
             template += '<tr style="height:30px;"><td style="text-align:right">剩余课时:</td><td style="text-align:left;padding-left:50px;"><span>'+member.courseRemain+'</span></td> </tr>';
-            template += '<tr style="height:30px;"><td style="text-align:right">备注:</td><td style="text-align:left;padding-left:50px;"><span>'+member.comment+'</span></td> </tr>';
-            template += '<tr style="min-height:30px;"><td style="vertical-align:top;text-align:right">课时详情('+member.courseUsed+'天):</td><td style="text-align:left;padding-left:50px;"><div style="width:200px;height:100px; overflow-y:scroll;">';
-            for(var k = 0 ; k < member.courseUsed.length ; k++){
-                template += '<div>'+member.courseUsed[k]+'</div>';
+            template += '<tr style="min-height:30px;"><td style="vertical-align:top;text-align:right">课时详情('+member.courseUsed+'天):</td><td style="text-align:left;padding-left:50px;"><div style="width:400px;height:100px; overflow-y:auto;">';
+            for(var k = 0 ; k < member.courseUsedList.length ; k++){
+                template += '<div>'+member.courseUsedList[k].date+'<span style="margin-left:10px;">'+member.courseUsedList[k].comment+'</span></div>';
             }
             template += '</div></td>';
-            template += '<tr style="min-height:30px;"><td style="vertical-align:top;text-align:right">请假详情('+member.courseAbsentList.length+'天):</td><td style="text-align:left;padding-left:50px;"><div style="width:200px;height:100px; overflow-y:scroll;">';
-            for(var k = 0 ; k < member.courseAbsent.length ; k++){
-                template += '<div>'+member.courseAbsent[k]+'</div>';
+            template += '<tr style="min-height:30px;"><td style="vertical-align:top;text-align:right">请假详情('+member.courseAbsentList.length+'天):</td><td style="text-align:left;padding-left:50px;"><div style="width:400px;height:100px; overflow-y:auto;">';
+            for(var k = 0 ; k < member.courseAbsentList.length ; k++){
+                template += '<div>'+member.courseAbsentList[k].date+'<span style="margin-left:10px;">'+member.courseAbsentList[k].comment+'</span></div>';
             }
             template += '</div></td>';
         }

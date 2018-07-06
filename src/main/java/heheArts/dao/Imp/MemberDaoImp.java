@@ -123,7 +123,7 @@ public class MemberDaoImp extends BaseDao implements MemberDao {
 
     @Override
     public boolean login(String tel, String password) throws SQLException {
-        String selectSql = String.format("SELECT count(0) FROM Member Tel = '%s' and Password= '%s' ", tel, password);
+        String selectSql = String.format("SELECT count(0) FROM Member where Tel = '%s' and Password= '%s' ", tel, password);
 
         try (Connection connection = DriverManager.getConnection(dbConnectString)) {
             try (Statement stmt = connection.createStatement()) {
@@ -204,9 +204,9 @@ public class MemberDaoImp extends BaseDao implements MemberDao {
     }
 
     @Override
-    public List<MemberExt> searchMemberExtInfoByTel(String tel, String password) throws SQLException {
+    public List<MemberExt> searchMemberExtInfoByTel(String tel) throws SQLException {
         List<MemberExt> items = new ArrayList<MemberExt>();
-        String selectSql = "SELECT a.Id, a.Name, a.Tel, a.Password, a.Course, a.CourseHour, a.CourseFee FROM Member a where tel = '%s'";
+        String selectSql = String.format("SELECT a.Id, a.Name, a.Tel, a.Password, a.Course, a.CourseHour, a.CourseFee FROM Member a where a.Tel = '%s'", tel);
         try (Connection connection = DriverManager.getConnection(dbConnectString)) {
             try (Statement stmt = connection.createStatement()) {
                 try (ResultSet rs = stmt.executeQuery(selectSql)) {
@@ -225,14 +225,14 @@ public class MemberDaoImp extends BaseDao implements MemberDao {
                         for(CourseUsage cu : courseUsages){
                             if(cu.getType().equals("u")) {
                                 item.getCourseUsedList().add(cu);
-                            }
-                            if(cu.getType().equals("a")){
+                            }else if(cu.getType().equals("a")){
                                 item.getCourseAbsentList().add(cu);
                             }
                         }
                         item.setCourseUsed(item.getCourseUsedList().size());
                         item.setCourseRemain(Integer.parseInt(item.getCourseHour())-item.getCourseUsed());
 
+                        items.add(item);
                     }
                 }
             }
