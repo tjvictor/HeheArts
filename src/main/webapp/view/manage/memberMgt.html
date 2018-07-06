@@ -39,6 +39,8 @@
            onclick="openMemberPanel('edit')">编辑会员</a>
         <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true"
            onclick="deleteMember()">删除会员</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true"
+           onclick="openCheckInPanel()">会员签到/缺席</a>
     </div>
     <div id="memberPagination" class="easyui-pagination"
          style="background:#efefef;border:1px solid #ccc;margin-top:10px;"
@@ -93,6 +95,20 @@
         </div>
         <div id="updateMemberBtn" class="easyui-linkbutton right" data-options="iconCls:'icon-edit'"
              onclick="updateMember()">修改会员信息
+        </div>
+        <div class="clear"></div>
+    </div>
+
+    <div id="memberCheckInView" class="easyui-dialog" title="签到/缺席" style="width:300px;height:320px;display:none;padding:10px;"
+         data-options="iconCls:'icon-save',resizable:false,modal:true,closed:true, buttons:'#memberCheckInBtnDiv'">
+
+    </div>
+    <div id="memberCheckInBtnDiv">
+        <div id="checkInMemberBtn" class="easyui-linkbutton right" data-options="iconCls:'icon-add'"
+             onclick="checkInMember()">签到
+        </div>
+        <div id="absenceMemberBtn" class="easyui-linkbutton right" data-options="iconCls:'icon-edit'"
+             onclick="absenceMember()">缺席
         </div>
         <div class="clear"></div>
     </div>

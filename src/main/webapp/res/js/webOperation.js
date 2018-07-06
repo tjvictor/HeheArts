@@ -377,7 +377,6 @@ function updateMember(){
 
     callAjax('/websiteService/updateMember', '', 'updateMemberCallback', '', 'POST', postValue, '');
 }
-
 function updateMemberCallback(data){
     $.messager.show({
         title: '操作提示',
@@ -394,10 +393,55 @@ function updateMemberCallback(data){
 function getMemberTotalCount(name){
     callAjax('/websiteService/getMemberTotalCount', '', 'getMemberTotalCountCallback', '', '', name, '');
 }
-
 function getMemberTotalCountCallback(data){
     if (data.status == "ok") {
-        $('#memberPagination').pagination({total:data.callBackData})
+        $('#memberPagination').pagination({total:data.callBackData});
+    }
+}
+
+function searchMemberExtInfoByTel(){
+    var tel = $('#telTxt').val();
+    var password = $('#passwordTxt').val();
+    if(tel === '' || password === ''){
+        return;
+    }
+
+    var param = "tel="+tel+"&password="+password;
+    callAjax('/websiteService/searchMemberExtInfoByTel', '', 'searchMemberExtInfoByTelCallback', '', '', param, '');
+}
+function searchMemberExtInfoByTelCallback(data){
+    if (data.status == "ok") {
+        var items = data.callBackData;
+        var template = '<div style="width:100%;min-height:400px;background-color:white;">';
+        for(var i = 0 ; i < items.length ; i++){
+            var member = items[i];
+            if(i > 0){
+                template += '<div class="splitLine"></div>';
+            }
+            template += '<table style="width:100%">';
+            template += '<tr style="height:30px;"><td style="text-align:right">会员名称:</td><td style="text-align:left;padding-left:50px;"><span>'+member.name+'</span></td></tr>';
+            template += '<tr style="height:30px;"><td style="text-align:right">报名课程:</td><td style="text-align:left;padding-left:50px;"><span>'+member.course+'</span></td> </tr>';
+            template += '<tr style="height:30px;"><td style="text-align:right">报名课时:</td><td style="text-align:left;padding-left:50px;"><span>'+member.courseHour+'</span></td> </tr>';
+            template += '<tr style="height:30px;"><td style="text-align:right">报名费用:</td><td style="text-align:left;padding-left:50px;"><span>'+member.courseFee+'</span></td> </tr>';
+            template += '<tr style="height:30px;"><td style="text-align:right">使用课时:</td><td style="text-align:left;padding-left:50px;"><span>'+member.courseUsed+'</span></td> </tr>';
+            template += '<tr style="height:30px;"><td style="text-align:right">剩余课时:</td><td style="text-align:left;padding-left:50px;"><span>'+member.courseRemain+'</span></td> </tr>';
+            template += '<tr style="height:30px;"><td style="text-align:right">备注:</td><td style="text-align:left;padding-left:50px;"><span>'+member.comment+'</span></td> </tr>';
+            template += '<tr style="min-height:30px;"><td style="vertical-align:top;text-align:right">课时详情('+member.courseUsed+'天):</td><td style="text-align:left;padding-left:50px;"><div style="width:200px;height:100px; overflow-y:scroll;">';
+            for(var k = 0 ; k < member.courseUsed.length ; k++){
+                template += '<div>'+member.courseUsed[k]+'</div>';
+            }
+            template += '</div></td>';
+            template += '<tr style="min-height:30px;"><td style="vertical-align:top;text-align:right">请假详情('+member.courseAbsentList.length+'天):</td><td style="text-align:left;padding-left:50px;"><div style="width:200px;height:100px; overflow-y:scroll;">';
+            for(var k = 0 ; k < member.courseAbsent.length ; k++){
+                template += '<div>'+member.courseAbsent[k]+'</div>';
+            }
+            template += '</div></td>';
+        }
+        template += '</div>';
+
+        $('.content').html(template);
+    } else{
+        $('#reminderTxt').text(data.prompt);
     }
 }
 //member end

@@ -1,10 +1,110 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<div style="width:1200px;height: 400px; background-color:white;padding:10px;margin:0 auto;display:none;">
+    <table style="width:100%">
+        <tr style="height:50px">
+            <td style="width:45%;text-align:right;font-size:20px;">会员手机</td>
+            <td style="width:5%"></td>
+            <td style="width:50%;text-align:left;"><input id="telTxt" type="text" style="border-radius: 5px;width: 200px;height: 30px;border: 1px solid black;"></td>
+        </tr>
+        <tr style="height:50px">
+            <td style="width:45%;text-align:right;font-size:20px;">会员密码</td>
+            <td style="width:5%"></td>
+            <td style="width:50%;text-align:left;"><input id="passwordTxt" type="password" style="border-radius: 5px;width: 200px;height: 30px;border: 1px solid black;"></td>
+        </tr>
+        <tr style="height:50px">
+            <td style="width:45%;text-align:right;"></td>
+            <td style="width:5%"></td>
+            <td style="width:50%;text-align:left;"><input id="submitBtn" type="button" value="查询" onclick="searchMemberExtInfoByTel();" style="border-radius: 5px;border: 0;background-color: black;color: white;width: 100px;height: 30px;"></td>
+        </tr>
+        <tr style="height:50px">
+            <td style="width:45%;text-align:right;"></td>
+            <td style="width:5%"></td>
+            <td style="width:100%;text-align:left;">
+                <span id="reminderTxt" style="font-size:16px;color:red;"></span>
+            </td>
+        </tr>
+    </table>
+</div>
 
-</body>
-</html>
+<div style="width:100%;height:auto;background-color:grey;">
+    <div style="width:100%;height:auto;background-color:white;">
+        <table style="width:100%">
+            <tr style="height:30px;">
+                <td style="text-align:right">会员名称:</td>
+                <td style="text-align:left;;padding-left:50px;"><span></span></td>
+            </tr>
+            <tr style="height:30px;">
+                <td style="text-align:right">报名课程:</td>
+                <td style="text-align:left;padding-left:50px;"><span></span></td>
+            </tr>
+            <tr style="height:30px;">
+                <td style="text-align:right">报名课时:</td>
+                <td style="text-align:left;padding-left:50px;"><span></span></td>
+            </tr>
+            <tr style="height:30px;">
+                <td style="text-align:right">报名费用:</td>
+                <td style="text-align:left;padding-left:50px;"><span></span></td>
+            </tr>
+            <tr style="height:30px;">
+                <td style="text-align:right">使用课时:</td>
+                <td style="text-align:left;padding-left:50px;"><span></span></td>
+            </tr>
+            <tr style="height:30px;">
+                <td style="text-align:right">剩余课时:</td>
+                <td style="text-align:left;padding-left:50px;"><span></span></td>
+            </tr>
+            <tr style="min-height:30px;">
+                <td style="vertical-align:top;text-align:right">课时详情:</td>
+                <td style="text-align:left;padding-left:50px;">
+                    <div style="width:200px;height:100px; overflow-y:scroll;">
+                    <div>a</div>
+                    <div>a</div>
+                    <div>a</div>
+                    <div>a</div>
+                    <div>a</div>
+                    <div>a</div>
+                    <div>a</div>
+                    <div>a</div>
+                    <div>a</div>
+                    <div>a</div>
+                    <div>a</div>
+                    <div>a</div>
+                    <div>a</div>
+                    <div>a</div>
+                    <div>a</div>
+                    <div>a</div>
+                    <div>a</div>
+                    <div>a</div>
+                    <div>a</div>
+                    </div>
+                </td>
+            </tr>
+            <tr style="min-height:30px;">
+                <td style="vertical-align:top;text-align:right">请假详情:</td>
+                <td style="text-align:left;padding-left:50px;">
+                    <div style="width:200px;height:100px; overflow-y:scroll;">
+                        <div>a</div>
+                        <div>a</div>
+                        <div>a</div>
+                        <div>a</div>
+                        <div>a</div>
+                        <div>a</div>
+                        <div>a</div>
+                        <div>a</div>
+                        <div>a</div>
+                        <div>a</div>
+                        <div>a</div>
+                        <div>a</div>
+                        <div>a</div>
+                        <div>a</div>
+                        <div>a</div>
+                        <div>a</div>
+                        <div>a</div>
+                        <div>a</div>
+                        <div>a</div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+</div>

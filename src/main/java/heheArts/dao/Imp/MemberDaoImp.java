@@ -3,6 +3,7 @@ package heheArts.dao.Imp;
 import heheArts.dao.MemberDao;
 import heheArts.model.CourseUsage;
 import heheArts.model.Member;
+import heheArts.model.MemberExt;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
@@ -121,29 +122,21 @@ public class MemberDaoImp extends BaseDao implements MemberDao {
     }
 
     @Override
-    public Member login(String tel, String password) throws SQLException {
-        Member item = new Member();
-
-        String selectSql = String.format("SELECT Id, Name, Tel, Password, Course, CourseHour, CourseFee FROM Member Tel = '%s' and Password= '%s' ", tel, password);
+    public boolean login(String tel, String password) throws SQLException {
+        String selectSql = String.format("SELECT count(0) FROM Member Tel = '%s' and Password= '%s' ", tel, password);
 
         try (Connection connection = DriverManager.getConnection(dbConnectString)) {
             try (Statement stmt = connection.createStatement()) {
                 try (ResultSet rs = stmt.executeQuery(selectSql)) {
                     if (rs.next()) {
-                        int i = 1;
-                        item.setId(rs.getString(i++));
-                        item.setName(rs.getString(i++));
-                        item.setTel(rs.getString(i++));
-                        item.setPassword(rs.getString(i++));
-                        item.setCourse(rs.getString(i++));
-                        item.setCourseHour(rs.getString(i++));
-                        item.setCourseFee(rs.getString(i++));
+                        if (rs.getInt(1) > 0)
+                            return true;
                     }
                 }
             }
         }
 
-        return item;
+        return false;
     }
 
     @Override
@@ -208,5 +201,45 @@ public class MemberDaoImp extends BaseDao implements MemberDao {
         }
 
         return 0;
+    }
+
+    @Override
+    public List<MemberExt> searchMemberExtInfoByTel(String tel, String password) throws SQLException {
+        List<MemberExt> items = new ArrayList<MemberExt>();
+        String selectSql = "SELECT a.Id, a.Name, a.Tel, a.Password, a.Course, a.CourseHour, a.CourseFee FROM Member a where tel = '%s'";
+        try (Connection connection = DriverManager.getConnection(dbConnectString)) {
+            try (Statement stmt = connection.createStatement()) {
+                try (ResultSet rs = stmt.executeQuery(selectSql)) {
+                    while (rs.next()) {
+                        int i = 1;
+                        MemberExt item = new MemberExt();
+                        item.setId(rs.getString(i++));
+                        item.setName(rs.getString(i++));
+                        item.setTel(rs.getString(i++));
+                        item.setPassword(rs.getString(i++));
+                        item.setCourse(rs.getString(i++));
+                        item.setCourseHour(rs.getString(i++));
+                        item.setCourseFee(rs.getString(i++));
+
+                        List<CourseUsage> courseUsages = getCourseUsagesByUserId(item.getId());
+                        for(CourseUsage cu : courseUsages){
+                            if(cu.getType().equals("u")) {
+                                item.getCourseUsedList().add(cu);
+                            }
+                            if(cu.getType().equals("a")){
+                                item.getCourseAbsentList().add(cu);
+                            }
+                        }
+                        item.setCourseUsed(item.getCourseUsedList().size());
+                        item.setCourseRemain(Integer.parseInt(item.getCourseHour())-item.getCourseUsed());
+
+                    }
+                }
+            }
+        }
+
+
+
+        return items;
     }
 }

@@ -4,6 +4,7 @@ import heheArts.dao.MemberDao;
 import heheArts.dao.NotificationDao;
 import heheArts.model.FileUploadEntity;
 import heheArts.model.Member;
+import heheArts.model.MemberExt;
 import heheArts.model.Notification;
 import heheArts.model.ResponseObject;
 import heheArts.utils.CommonUtils;
@@ -215,17 +216,17 @@ public class webServices {
     //endregion
 
     //region member
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public ResponseObject login(@RequestParam(value = "tel") String sid,
+    @RequestMapping(value = "/searchMemberExtInfoByTel", method = RequestMethod.GET)
+    public ResponseObject searchMemberExtInfoByTel(@RequestParam(value = "tel") String tel,
                                 @RequestParam(value = "password") String password) {
 
         try {
-            Member item = memberDaoImp.login(sid, password);
-            if (org.apache.commons.lang3.StringUtils.isNotEmpty(item.getId())) {
-                return new ResponseObject("ok", "登录成功", item);
-            }
-            else
+            if (!memberDaoImp.login(tel, password)) {
                 return new ResponseObject("error", "用户不存在或密码错误!", "");
+            }
+            List<MemberExt> items = memberDaoImp.searchMemberExtInfoByTel(tel, password);
+            return new ResponseObject("ok", "查询成功", items);
+
         } catch (SQLException e) {
             logger.error(e.getMessage(), e);
             return new ResponseObject("error", "系统错误，请联系系统管理员");

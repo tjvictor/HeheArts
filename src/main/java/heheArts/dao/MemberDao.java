@@ -2,6 +2,7 @@ package heheArts.dao;
 
 import heheArts.model.CourseUsage;
 import heheArts.model.Member;
+import heheArts.model.MemberExt;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -17,7 +18,7 @@ public interface MemberDao {
 
     void updateMember(Member item) throws SQLException;
 
-    Member login(String tel, String password) throws SQLException;
+    boolean login(String tel, String password) throws SQLException;
 
     void insertCourseUsage(CourseUsage item) throws SQLException;
 
@@ -26,4 +27,6 @@ public interface MemberDao {
     List<CourseUsage> getCourseUsagesByUserId(String userId) throws SQLException;
 
     int getMemberTotalCount(String name) throws SQLException;
+
+    List<MemberExt> searchMemberExtInfoByTel(String tel, String password) throws SQLException;
 }
